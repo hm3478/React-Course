@@ -1,0 +1,27 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "This namaste react by harsh mishra ",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hm3478/React-Course.git"
+  },
+  "keywords": [],
+  "author": "Harsh Mishra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hm3478/React-Course/issues"
+  },
+  "homepage": "https://github.com/hm3478/React-Course#readme",
+  "devDependencies": {
+    "parcel": "^2.10.2",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
