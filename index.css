@@ -1,3 +1,66 @@
-p{
-    color: red;
+.header{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid;
+    border-radius: 10px;
+    background-color: #de575a;
+}
+.logo{
+    width: 65px;
+}
+
+.menu-items>ul{
+ display: flex ; 
+ list-style: none;
+ font-size: 19px;
+}
+.menu-items>ul>li{
+    padding-right: 10px;
+    margin :10px
+}
+.filter{
+    display: flex;
+    margin-top: 20px;  
+    justify-content: start;
+}
+.filter-btn{
+    border-radius: 10px;
+    height: inherit;
+}
+.filter-btn:hover{
+    cursor: pointer;
+    background-color: #de575a;
+   
+}
+.input>label{
+    display: flex;
+    
+}
+.Res-Card{
+    margin-top: 55px;
+    height: 300px;
+    width: 200px;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    margin-right: 14px;
+}
+.Res-Card:hover{
+    box-shadow: 5px 5px rgb(173, 169, 169);
+    cursor: pointer;
+    border: 0.5px solid black;
+    
+}
+.Res-Card>h3,h4,h5,h6{
+    display: flex;
+    justify-content: start;
+    margin-top: -4px;
+}
+.Res-Card>.card-img{
+    height: 120px;
+    width: 199px;
+    border-radius: 10px;
+}
+.rest-container{
+    display: flex;
+    flex-wrap: wrap;
 }
