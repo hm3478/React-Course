@@ -27,5 +27,4 @@ const ResCard=(props)=>{
             </div>
     );
 };
-
 export default ResCard;
