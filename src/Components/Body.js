@@ -1,61 +1,79 @@
 import ResCard from "./ResCard";
-import { resObj } from "../data/resObj";
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
+
 
 const Body = () => {
-  const [res, setRes] = useState([]);
-
+  const [restaurantList, setRestaurantList] = useState([]);
+  const [search, setSearch] = useState("");
+  const [button, setButton] = useState("Top Rated Restaurants");
+  const [filteredRestaurantList, setFilteredRestaurantList] = useState([]);
 
   // const handleFilterClick = () => {
   //   const filteredData = res.filter((i) => i.avgRating >= 4);
   //   setRes(filteredData);
   // };
 
-useEffect(()=>{
-  fetchData();
-},[])
-const fetchData = async ()=>{
-  const data = await fetch(
-    "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.557269&lng=88.302513&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+  useEffect(() => {
+    fetchData();
+  }, []);
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.557269&lng=88.302513&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
-  
-const json = await data.json();
-setRes( json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
-console.log(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
 
-
-};
-// useEffect(()=>{
-// //   fetchData();
-// // },[])
-
-// // const fetchData= async ()=>{
-// //   const data = await fetch(
-// //         "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.848717&lng=77.6727463&collection=83649&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null"
-// //        );
-      
-// //      const json = await data.json();
-// //      console.log(json.data.cards)
-// //      setRes(json.data.cards[3])
-// // }
-
-
-if(res.length===0){return <h2>Loading....</h2>}
+    const json = await data.json();
+    setRestaurantList(
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    setFilteredRestaurantList(
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    //  const dt = json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+  };
+  if (filteredRestaurantList.length === 0) {
+    return <h1>Loading....</h1>;
+  }
   return (
     <div className="body">
       <div className="search-container">
         <div className="filter">
-          <button className="filter-btn" onClick={()=>{
-    const x = res.filter((i) => i.avgRating >= 4);
-    setRes(x);
-  }}
-   >
-            Top Rated Restaurants
+           <button
+            className="filter-btn"
+            onClick={() => {
+              button === "Top Rated Restaurants"
+                ? setButton("All Restaurants") ||
+                  setFilteredRestaurantList(restaurantList.filter((i) => i.info.avgRating > 4))
+                : setButton("Top Rated Restaurants") || setFilteredRestaurantList(restaurantList)
+            }}
+          >
+            {button}
+          </button> 
+
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              console.log(search);
+            }}
+          />
+
+          <button
+            onClick={() => {
+              const searchList = restaurantList.filter((resta) => {
+               return resta.info.name.includes(search);
+              });
+              
+              setFilteredRestaurantList(searchList);
+              console.log(searchList);
+            }}
+          >
+            search
           </button>
         </div>
 
         <div className="rest-container">
-          {res.map((rest) => (
+          {filteredRestaurantList.map((rest) => (
             <ResCard resData={rest} key={rest.id} />
           ))}
         </div>

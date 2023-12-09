@@ -38,11 +38,12 @@
 }
 .Res-Card{
     margin-top: 55px;
-    height: 300px;
+    height: 350px;
     width: 200px;
     border-radius: 10px;
     background-color: #f0f0f0;
     margin-right: 14px;
+    border: black solid 1px;
 }
 .Res-Card:hover{
     box-shadow: 5px 5px rgb(173, 169, 169);

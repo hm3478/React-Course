@@ -20,11 +20,13 @@
   "homepage": "https://github.com/hm3478/React-Course#readme",
   "devDependencies": {
     "parcel": "^2.10.2",
-    "process": "^0.11.10"
+    "process": "^0.11.10",
+    "react-router-dom": "^6.20.1"
   },
   "dependencies": {
     "@parcel/resolver-glob": "^2.10.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router": "^6.20.1"
   }
 }
