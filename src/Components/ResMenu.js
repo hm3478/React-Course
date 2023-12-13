@@ -5,22 +5,29 @@ import { MENU_API_URL } from '../utils/constants';
 
 const ResMenu = () => {
   const { resId } = useParams();
+  console.log("resId",resId)
   const [menuInfo, setMenuInfo] = useState([]);
-  useParams(resId);
-
+  
   useEffect(() => {
     fetchMenu();
   }, []);
 
   async function fetchMenu() {
-    const menuData = await fetch(MENU_API_URL + 467);
+    const menuData = await fetch(MENU_API_URL + resId );
     const jsonData = await menuData.json();
+    console.log("Api data",jsonData)
+
     setMenuInfo(jsonData);
+    console.log("menu info",menuInfo)
+  
   }
 
   const { name, cuisines, costForTwo } = menuInfo?.data?.cards[0]?.card?.card?.info || {};
-  const { itemCards } =
-    menuInfo?.data?.cards[2]?.groupedCard?.cardGroupedMap?.REGULAR?.card[1]?.card?.card || {};
+  if(menuInfo===null)return <h1>Loading....</h1>
+  const {itemCards} = menuInfo?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card ||{};
+  console.log("menu items",itemCards)
+
+
 
   return (
     <div className="menu">
@@ -29,13 +36,8 @@ const ResMenu = () => {
         {cuisines ? cuisines.join(', ') : ''} - Rs.{costForTwo / 100}
       </p>
       <ul>
-        {itemCards && itemCards.length > 0 && (
-          <li>{itemCards[0]?.card?.info?.name}</li>
-        )}
-        <li>Burger</li>
-        <li>Burger</li>
-        <li>Burger</li>
-        <li>Burger</li>
+        {/* {itemCards.map(item=><li>{item?.card?.info?.name}</li>)} */}
+      
       </ul>
     </div>
   );

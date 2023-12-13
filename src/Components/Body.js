@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
 import ResCard from "./ResCard";
 import { useState, useEffect } from "react";
+// import { Route } from "react-router-dom";
 
 
 const Body = () => {
@@ -22,6 +24,7 @@ const Body = () => {
     );
 
     const json = await data.json();
+    console.log(json,"api data")
     setRestaurantList(
       json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
@@ -61,7 +64,7 @@ const Body = () => {
           <button
             onClick={() => {
               const searchList = restaurantList.filter((resta) => {
-               return resta.info.name.includes(search);
+               return resta.info.name.toLower().includes(search);
               });
               
               setFilteredRestaurantList(searchList);
@@ -74,7 +77,12 @@ const Body = () => {
 
         <div className="rest-container">
           {filteredRestaurantList.map((rest) => (
+             <Link
+             to={"/menu/" + rest?.info?.id}
+             key={rest?.info?.id}
+           >
             <ResCard resData={rest} key={rest.id} />
+            </Link>
           ))}
         </div>
       </div>
